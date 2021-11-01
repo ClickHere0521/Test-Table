@@ -1,25 +1,24 @@
-import logo from './logo.svg';
+import Provider from 'react-redux/es/components/Provider';
+import { PersistGate } from 'redux-persist/integration/react';
+import { persistStore } from 'redux-persist';
+import { StyledEngineProvider } from '@mui/material/styles';
+import { store } from './store';
+import DemoTable from './app/DemoTable';
+import FileRead from './app/FileRead';
 import './App.css';
 
-function App() {
+const App = () => {
+  let persistor = persistStore(store);
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+    <Provider store={store}>
+      {/* <PersistGate loading={null} persistor={persistor}>*/}
+        <StyledEngineProvider injectFirst>   
+          <FileRead />   
+          <DemoTable />
+        </StyledEngineProvider>
+      {/* </PersistGate>*/}
+    </Provider>
+  );   
 }
 
 export default App;
