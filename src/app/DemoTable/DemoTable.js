@@ -22,15 +22,16 @@ const DemoTable = () => {
   const convertGridColumn = () => {
     let columnsTemp = [];
     Object.keys(columnData).length !== 0 && columnData.fields.length > 0 && columnData.fields.forEach((element) => {
-      let elementType;
+      let elementType, width;
       elementType = element.type === 'LongType' || element.type === 'DoubleType' || element.type === 'IntType' ? 'number' : 'string';
+      width = element.name === 'ts' || element.name === 'key' ? 170 : 130;
       columnsTemp.push({
         field: element.name,
         headerName: element.name,
         editable: true,
         sortable: true,
         type: elementType,
-        width: 130
+        minWidth: width,
       });
     })
     setColumns(columnsTemp);
